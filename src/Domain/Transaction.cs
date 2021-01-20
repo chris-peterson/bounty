@@ -5,6 +5,7 @@ namespace bounty.Domain
 {
     public class Transaction
     {
+        public ushort AccountId { get; set; }
         public DateTime Timestamp { get; set; }
         public decimal Amount { get; set; }
         public string Payee { get; set; }
@@ -15,7 +16,8 @@ namespace bounty.Domain
 
     public enum Status
     {
+        Pending,
         Cleared,
-        Pending
+        Reconciled
     }
 }

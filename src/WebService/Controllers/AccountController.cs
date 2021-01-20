@@ -2,7 +2,7 @@ using System.Linq;
 using bounty.Domain;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebService.Controllers
+namespace bounty.WebService.Controllers
 {
     [ApiController]
     public class AccountController
@@ -27,7 +27,7 @@ namespace WebService.Controllers
         [Route("accounts")]
         public void CreateAccount(Account account)
         {
-            _accountRepository.CreateAccount(account);
+            _accountRepository.SaveAccount(account);
         }
     }
 }

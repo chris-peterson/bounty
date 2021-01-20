@@ -10,6 +10,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>bounty.Infrastructure</RootNamespace>
   </PropertyGroup>
 
 </Project>

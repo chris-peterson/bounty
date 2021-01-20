@@ -8,7 +8,7 @@ namespace bounty.Domain
         public DateTime StartDate { get; }
         public TimeSpan Interval { get; }
 
-        private Schedule(DateTime startDate, TimeSpan interval)
+        Schedule(DateTime startDate, TimeSpan interval)
         {
             StartDate = startDate;
             Interval = interval;

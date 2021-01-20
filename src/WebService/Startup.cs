@@ -1,5 +1,5 @@
 using bounty.Domain;
-using Infrastructure;
+using bounty.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace WebService
+namespace bounty.WebService
 {
     public class Startup
     {
@@ -24,9 +24,10 @@ namespace WebService
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BountyWebService", Version = "v1" });
             });
-            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountRepository, CompositeRepository>();
+            services.AddTransient<ITransactionRepository, CompositeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
