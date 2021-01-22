@@ -1,0 +1,43 @@
+@page "/Transactions"
+@using WebUi.ServiceClients
+@using bounty.Domain
+@inject BountyWebServiceClient BountyWebServiceClient
+
+<h3>Transactions</h3>
+
+@if (transactions == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var transaction in transactions)
+        {
+            <tr>
+                <td>@transaction.Timestamp</td>
+                <td>@transaction.Amount</td>
+                <td>@transaction.Status</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br />
+    <h5><a href="NewTransaction">New...</a></h5>
+}
+@code {
+    private IEnumerable<Transaction> transactions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        transactions = await BountyWebServiceClient.GetTransactions();
+    }
+}

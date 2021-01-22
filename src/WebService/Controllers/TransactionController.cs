@@ -24,7 +24,7 @@ namespace bounty.WebService.Controllers
         }
 
         [HttpPost]
-        [Route("transaction")]
+        [Route("transactions")]
         public void CreateTransaction(Transaction transaction)
         {
             _transactionRepository

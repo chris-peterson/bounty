@@ -6,7 +6,7 @@ namespace bounty.Domain
     public class Transaction
     {
         public ushort AccountId { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime Timestamp { get; set; } = DateTime.Today;
         public decimal Amount { get; set; }
         public string Payee { get; set; }
         public string Category { get; set; }

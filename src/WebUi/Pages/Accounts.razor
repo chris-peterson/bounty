@@ -1,0 +1,43 @@
+﻿@page "/accounts"
+
+@using WebUi.ServiceClients
+@using bounty.Domain
+@inject BountyWebServiceClient BountyWebServiceClient
+
+<h1>Accounts</h1>
+
+@if (accounts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Current Balance</th>
+                <th>Last Reconciled</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in accounts)
+            {
+                <tr>
+                    <td>@account.Name</td>
+                    <td>@account.CurrentBalance</td>
+                    <td>@account.LastReconciled</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Account> accounts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        accounts = await BountyWebServiceClient.GetAccounts();
+    }
+}

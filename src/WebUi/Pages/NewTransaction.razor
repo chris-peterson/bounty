@@ -1,0 +1,44 @@
+@page "/NewTransaction"
+@using bounty.Domain
+@using WebUi.Models
+@using WebUi.ServiceClients
+@inject BountyWebServiceClient BountyWebServiceClient
+@inject NavigationManager NavManager
+<h1>New Transaction</h1>
+
+<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+    <p>
+        <label>
+            Date
+            <RadzenDatePicker @bind-Value=transaction.Timestamp DateFormat="d" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Amount
+            <RadzenNumeric @bind-Value=transaction.Amount Placeholder="0.0" Step="1.0"  />
+        </label>
+    </p>
+    <p>
+        <RadzenAutoComplete Placeholder="Category..." Data=transactions @bind-Value="transaction.Category" TextProperty="Category" />
+    </p>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    EditContext editContext;
+    readonly Transaction transaction = new Transaction();
+    IEnumerable<Transaction> transactions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        editContext = new EditContext(transaction);
+        transactions = await BountyWebServiceClient.GetTransactions();
+    }
+
+    async Task HandleSubmit()
+    {
+        await BountyWebServiceClient.SaveTransaction(transaction);
+        NavManager.NavigateTo("/transactions");
+    }
+}
